@@ -87,7 +87,7 @@ public class CameraMovementScript : MonoBehaviour
                     0.48f,
                     Vector3.down,
                     out var _,
-                    0.5f
+                    0.1f
                 ))
             {
                 wantToJump = true;
