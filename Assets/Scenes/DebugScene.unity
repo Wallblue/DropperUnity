@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyRigidBody: {fileID: 118384035}
   bodyTransform: {fileID: 118384036}
-  headTransform: {fileID: 118384036}
+  headTransform: {fileID: 1555045004}
   speed: 6
   rotationSpeed: 360
   jumpForce: 7
@@ -491,6 +491,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 149.04199, y: -103.337006, z: 98.679}
+--- !u!4 &1555045004 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 297870011756207380, guid: 87b0c2b533aa38a45ae12f138f6af1ac, type: 3}
+  m_PrefabInstance: {fileID: 1955485331}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1955485331
 PrefabInstance:
   m_ObjectHideFlags: 0
