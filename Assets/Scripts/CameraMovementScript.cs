@@ -6,9 +6,9 @@ public class CameraMovementScript : MonoBehaviour
     public Rigidbody bodyRigidBody;
     public Transform bodyTransform;
     public Transform headTransform;
-    public float speed = 5f;
-    public float rotationSpeed = 360f;
-    public float jumpForce = 7f;
+    public float walkSpeed = 5f;
+    public float runSpeed = 10f;
+    public float jumpForce = 5f;
     public float mouseXSensitivity = 10f;
     public float mouseYSensitivity = 10f;
     public float pitchMax = 80f;
@@ -19,6 +19,7 @@ public class CameraMovementScript : MonoBehaviour
     private float yawRotation = 0.0f;
     private float pitchRotation = 0.0f;
     private bool wantToJump = false;
+    private bool wantToRun = false;
 
     private bool firstFrame = true;
     
@@ -79,6 +80,8 @@ public class CameraMovementScript : MonoBehaviour
         {
             xMovement += 1;
         }
+
+        wantToRun = Input.GetKey(KeyCode.LeftShift);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -143,6 +146,7 @@ public class CameraMovementScript : MonoBehaviour
             zMovement
         ).normalized;
 
+        float speed = wantToRun ? this.runSpeed : this.walkSpeed; 
         bodyTransform.position += rotation * movementIntent * (speed * Time.deltaTime);
 
         if (wantToJump)
