@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class DeathZoneScript : MonoBehaviour
 {
+    public bool isException = false;
+
     public static bool IsLevelOver = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!IsLevelOver)
+        if(!IsLevelOver || isException)
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
