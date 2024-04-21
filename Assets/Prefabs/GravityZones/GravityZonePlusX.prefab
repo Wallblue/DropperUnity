@@ -153,3 +153,4 @@ MonoBehaviour:
   xGravityForce: 7
   yGravityForce: 0
   zGravityForce: 0
+  isZone: 1

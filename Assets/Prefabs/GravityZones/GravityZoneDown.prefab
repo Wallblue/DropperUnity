@@ -121,6 +121,7 @@ MonoBehaviour:
   xGravityForce: 0
   yGravityForce: -7
   zGravityForce: 0
+  isZone: 1
 --- !u!1 &9196539110022340911
 GameObject:
   m_ObjectHideFlags: 0

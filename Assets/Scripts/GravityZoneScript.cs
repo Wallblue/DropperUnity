@@ -6,11 +6,14 @@ public class ChangeGravityZone : MonoBehaviour
     public float yGravityForce;
     public float zGravityForce;
 
+    public bool isZone; // By "zone" we mean the gravity should return to normal when the player exists the game object
+
     
     private float _xPreviousGravityForce;
     private float _yPreviousGravityForce;
     private float _zPreviousGravityForce;
-    private static bool _test;
+
+    private static bool _changeApplied;
 
     private void Start()
     {
@@ -20,26 +23,33 @@ public class ChangeGravityZone : MonoBehaviour
         _zPreviousGravityForce = currentGravity.z;
     }
 
+    /*
+     * We use OnTriggerStay because with OnTriggerEnter, if 2 zones are clinging to each other, the gravity change would have a conflict with OnTriggerExit's gravity change.
+     * We use _changeApplies to avoid changing gravity every frame.
+     */
     void OnTriggerStay(Collider other)
     {
-        if(!_test)
+        if(!_changeApplied)
         {
             Physics.gravity = new Vector3(
                 xGravityForce,
                 yGravityForce,
                 zGravityForce
             );
-            _test = true;
+            _changeApplied = isZone;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Physics.gravity = new Vector3(
-            _xPreviousGravityForce,
-            _yPreviousGravityForce,
-            _zPreviousGravityForce
-        );
-        _test = false;
+        if(isZone)
+        {
+            Physics.gravity = new Vector3(
+                _xPreviousGravityForce,
+                _yPreviousGravityForce,
+                _zPreviousGravityForce
+            );
+            _changeApplied = false;
+        }
     }
 }
