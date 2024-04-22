@@ -27,7 +27,6 @@ public class ChangeGravityZone : MonoBehaviour
             _xPreviousGravityForce = currentGravity.x;
             _yPreviousGravityForce = currentGravity.y;
             _zPreviousGravityForce = currentGravity.z;
-            Debug.Log(_xPreviousGravityForce + " " + _yPreviousGravityForce + " " + _zPreviousGravityForce);
 
             Physics.gravity = new Vector3(
                 xGravityForce,

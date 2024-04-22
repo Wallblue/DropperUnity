@@ -11,7 +11,14 @@ public class DeathZoneScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!IsLevelOver || isException)
+        if (!IsLevelOver || isException)
+        {
+            Physics.gravity = new Vector3(
+                0,
+                -9.41f,
+                0
+            );
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
