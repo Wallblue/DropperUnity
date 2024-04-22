@@ -15,14 +15,6 @@ public class ChangeGravityZone : MonoBehaviour
 
     private static bool _changeApplied;
 
-    private void Start()
-    {
-        Vector3 currentGravity = Physics.gravity;
-        _xPreviousGravityForce = currentGravity.x;
-        _yPreviousGravityForce = currentGravity.y;
-        _zPreviousGravityForce = currentGravity.z;
-    }
-
     /*
      * We use OnTriggerStay because with OnTriggerEnter, if 2 zones are clinging to each other, the gravity change would have a conflict with OnTriggerExit's gravity change.
      * We use _changeApplies to avoid changing gravity every frame.
@@ -31,6 +23,12 @@ public class ChangeGravityZone : MonoBehaviour
     {
         if(!_changeApplied)
         {
+            Vector3 currentGravity = Physics.gravity;
+            _xPreviousGravityForce = currentGravity.x;
+            _yPreviousGravityForce = currentGravity.y;
+            _zPreviousGravityForce = currentGravity.z;
+            Debug.Log(_xPreviousGravityForce + " " + _yPreviousGravityForce + " " + _zPreviousGravityForce);
+
             Physics.gravity = new Vector3(
                 xGravityForce,
                 yGravityForce,
