@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DeathZoneScript : MonoBehaviour
 {
-    public bool isException = false;
-
-    public static bool IsLevelOver = false;
+    public bool isException;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!IsLevelOver || isException)
+        if (!GameManager.IsCurrentLevelOver || isException)
         {
             Physics.gravity = new Vector3(
                 0,

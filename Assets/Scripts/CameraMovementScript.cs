@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CameraMovementScript : MonoBehaviour
@@ -14,14 +13,14 @@ public class CameraMovementScript : MonoBehaviour
     public float pitchMax = 80f;
     public float pitchMin = -80f;
 
-    private float zMovement = 0.0f;
-    private float xMovement = 0.0f;
-    private float yawRotation = 0.0f;
-    private float pitchRotation = 0.0f;
-    private bool wantToJump = false;
-    private bool wantToRun = false;
+    private float _zMovement;
+    private float _xMovement;
+    private float _yawRotation;
+    private float _pitchRotation;
+    private bool _wantToJump;
+    private bool _wantToRun;
 
-    private bool firstFrame = true;
+    private bool _firstFrame = true;
     
     private void Start()
     {
@@ -41,14 +40,14 @@ public class CameraMovementScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-        firstFrame = true;
+        _firstFrame = true;
     }
 
     public void Update()
     {
-        if (firstFrame)
+        if (_firstFrame)
         {
-            firstFrame = false;
+            _firstFrame = false;
             return;
         }
 
@@ -58,30 +57,30 @@ public class CameraMovementScript : MonoBehaviour
     private void HomeMadeController()
     {
 
-        yawRotation = Input.GetAxis("Mouse X") * mouseXSensitivity;
-        pitchRotation = Input.GetAxis("Mouse Y") * mouseYSensitivity;
+        _yawRotation = Input.GetAxis("Mouse X") * mouseXSensitivity;
+        _pitchRotation = Input.GetAxis("Mouse Y") * mouseYSensitivity;
 
         if (Input.GetKey(KeyCode.W))
         {
-            zMovement += 1;
+            _zMovement += 1;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            zMovement -= 1;
+            _zMovement -= 1;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            xMovement -= 1;
+            _xMovement -= 1;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            xMovement += 1;
+            _xMovement += 1;
         }
 
-        wantToRun = Input.GetKey(KeyCode.LeftShift);
+        _wantToRun = Input.GetKey(KeyCode.LeftShift);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -93,7 +92,7 @@ public class CameraMovementScript : MonoBehaviour
                     0.1f
                 ))
             {
-                wantToJump = true;
+                _wantToJump = true;
             }
         }
 
@@ -101,7 +100,7 @@ public class CameraMovementScript : MonoBehaviour
         var eulerRotation = rotation.eulerAngles;
         rotation = Quaternion.Euler(
             eulerRotation.x,
-            eulerRotation.y + yawRotation,
+            eulerRotation.y + _yawRotation,
             eulerRotation.z
         );
         bodyTransform.rotation = rotation;
@@ -110,7 +109,7 @@ public class CameraMovementScript : MonoBehaviour
         eulerRotation = rotation.eulerAngles;
 
         var originalPitch = eulerRotation.x;
-        var rawChangedPitch = originalPitch - pitchRotation;
+        var rawChangedPitch = originalPitch - _pitchRotation;
         var firstStepPitch = rawChangedPitch % 360;
 
         if (firstStepPitch > 180)
@@ -141,22 +140,22 @@ public class CameraMovementScript : MonoBehaviour
         var rotation = bodyTransform.rotation;
 
         var movementIntent = new Vector3(
-            xMovement,
+            _xMovement,
             0f,
-            zMovement
+            _zMovement
         ).normalized;
 
-        float speed = wantToRun ? this.runSpeed : this.walkSpeed; 
+        float speed = _wantToRun ? this.runSpeed : this.walkSpeed; 
         bodyTransform.position += rotation * movementIntent * (speed * Time.deltaTime);
 
-        if (wantToJump)
+        if (_wantToJump)
         {
             bodyRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            wantToJump = false;
+            _wantToJump = false;
         }
 
-        zMovement = 0.0f;
-        xMovement = 0.0f;
-        yawRotation = 0.0f;
+        _zMovement = 0.0f;
+        _xMovement = 0.0f;
+        _yawRotation = 0.0f;
     }
 }
