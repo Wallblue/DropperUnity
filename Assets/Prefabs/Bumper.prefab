@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyRigidBody: {fileID: 0}
-  bumpForce: 200
+  bumpForce: 200.4
 --- !u!54 &6863657340521555215
 Rigidbody:
   m_ObjectHideFlags: 0
