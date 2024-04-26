@@ -26,7 +26,7 @@ public class ChangeGravityZone : MonoBehaviour
             Vector3 currentGravity = Physics.gravity;
             _xPreviousGravityForce = currentGravity.x;
             _yPreviousGravityForce = currentGravity.y;
-            _zPreviousGravityForce = currentGravity.z;
+            _zPreviousGravityForce = currentGravity.z;  
 
             Physics.gravity = new Vector3(
                 xGravityForce,
