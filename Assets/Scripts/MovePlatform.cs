@@ -9,8 +9,6 @@ public class MovePl : MonoBehaviour
     public float distanceY;
     public float distanceZ;
 
-    public Levels onlyAfter;
-
     private float _initialX;
     private float _initialY;
     private float _initialZ;
@@ -22,8 +20,6 @@ public class MovePl : MonoBehaviour
     private int _prevX;
     private int _prevY;
     private int _prevZ;
-
-    private bool _toCheck;
 
     // Start is called before the first frame update
     void Start()
@@ -40,28 +36,11 @@ public class MovePl : MonoBehaviour
         _prevX = distanceX > 0 ? 1 : -1;
         _prevY = distanceY > 0 ? 1 : -1;
         _prevZ = distanceZ > 0 ? 1 : -1;
-
-        switch (onlyAfter)
-        {
-            case Levels.Gravity:
-                _toCheck = GameManager.IsGravityLevelDone;
-                break;
-
-            case Levels.MovingPlatforms:
-                _toCheck = GameManager.IsMovingPlatformsLevelDone;
-                break;
-
-            default:
-                _toCheck = true;
-                break;
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!_toCheck) return;
-
         Vector3 position = objectTransform.position;
         int x = ComputeMove(position.x, _goalX);
         if (x != _prevX) (_initialX, _goalX) = (_goalX, _initialX);
